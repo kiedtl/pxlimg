@@ -97,6 +97,35 @@ PXL images may be viewed either with:
   ```
 - any other command-line program that reads a file and displays raw data
 
+### (WIP) PXL image compression
+- Each pixel is enclosed in brackets (`(` and `)`). The BG SGR and the FB SGR
+  is separated by a pipe (`|`).
+- Each value of the RGB value is replaced by the ASCII equivalent.
+- The line is ended with an LF newline instead of the usual sequence.
+- Each compressed image file starts a marker indicating the version of the
+  PXL spec that is adheres to. E.g. is the PXL version is v1.2.3, then
+  the marker should look like this:
+  ```
+  %PXLCv1.2.3
+  ```
+- Each second line of a compressed image file is a marker indicating what
+  the pixel character is. In most cases this will be the upper-half block:
+  ```
+  %CHAR▀
+  ```
+
+#### Compression example
+Uncompressed:
+```
+\e[48;2;245;133;111m\e[38;2;123;234;56m▀\e[48;2;174;221;223m\e[38;2;123;234;99m▀\e[0m\e[B\e[0G
+```
+Compressed:
+```
+%PXLCv1.0.0
+%CHAR▀
+(õéo|{ê8)(®Ýß|{êc)\n
+```
+
 ### MIME Type
 When transferring PXL images on the internet, the appropriate MIME type is
 `image/pxl`.
