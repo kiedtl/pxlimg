@@ -88,21 +88,19 @@ PXL images may be viewed either with:
 - any other command-line program that reads a file and displays raw data
 
 ### (WIP) PXL image compression
-- Each pixel is enclosed in brackets (`(` and `)`). The BG SGR and the FB SGR
+- PXL compressed images MUST be encoded as UTF-8.
+- Each pixel is separated by a semicolon. The BG SGR and the FB SGR
   is separated by a pipe (`|`).
 - Each value of the RGB value is replaced by the ASCII equivalent.
   - For example, the RGB value `255,234,167` would become `ÿê§`.
+    - IF the RGB value is lower than 31, the number 255 is added to 
+      that value. E.g. 12 would become 267.
 - The line is ended with an LF newline instead of the usual sequence.
 - Each compressed image file starts a marker indicating the version of the
   PXL spec that is adheres to. E.g. is the PXL version is v1.2.3, then
   the marker should look like this:
   ```
   %PXLCv1.2.3
-  ```
-- Each second line of a compressed image file is a marker indicating what
-  the pixel character is. In most cases this will be the upper-half block:
-  ```
-  %CHAR▀
   ```
 
 #### Compression example
@@ -113,8 +111,7 @@ Uncompressed:
 Compressed:
 ```
 %PXLCv1.0.0
-%CHAR▀
-(õ…o|{ê8)(®Ýß|{êc)\n
+õ…o|{ê8;®Ýß|{êc\n
 ```
 
 ### MIME Type
