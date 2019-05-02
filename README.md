@@ -101,6 +101,7 @@ PXL images may be viewed either with:
 - Each pixel is enclosed in brackets (`(` and `)`). The BG SGR and the FB SGR
   is separated by a pipe (`|`).
 - Each value of the RGB value is replaced by the ASCII equivalent.
+  - For example, the RGB value `255,234,167` would become `ÿê§`.
 - The line is ended with an LF newline instead of the usual sequence.
 - Each compressed image file starts a marker indicating the version of the
   PXL spec that is adheres to. E.g. is the PXL version is v1.2.3, then
