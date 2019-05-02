@@ -36,10 +36,9 @@ sequences based images.
 
 ### Files
 
-A PXL file can be either encoded as ASCII or UTF-8. However, UTF-8 
+- A PXL file can be either encoded as ASCII or UTF-8. However, UTF-8 
 is strongly preferred.
-
-A PXL image file has the `.pxl` file extension.
+- A PXL image file has the `.pxl` file extension.
 
 
 ### Pixel
@@ -51,24 +50,37 @@ Unicode half-block trick.
 E[48;2;RRR;GGG;BBBmE[38;2;RRR;GGG;BBBm▀
 ```
 
-### Lines
+#### Pixel anatomy
+A single pixel is comprised of two SGR (Set Graphics Rendition) ASCII escape sequences.
+- The first sets **background** color of the pixel.
+  - This is comprised of a ESC char (`E`), `[48;2`, and then a semicolon/colon delimited RGB value ended by an `m`.
+    ```
+    E[48;2;RRR;GGG;BBBm
+    ```
+- The second sets the **foreground** color of the pixel.
+  - This is comprised of the ESC, `[38;2`, a semicolon/colon delimited RGB value ended by an `m`, and the pixel char.
+    ```
+    E[38;2;RRR;GGG;BBBm▀
+    ```
+    
+See [this page](https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences#extended-colors) for more information regarding the SGR ASCII escape sequences.
 
+### Lines
 Lines are comprised of multiple pixels joined without any 
 spaces/delimiter. Lines always end with the following sequence:
 ```
-E[0mE[BE[0G"
+E[0mE[BE[0G
 ```
 This sequence is required. It does three things:
 - resets the color
 - moves the cursor down one row
 - moves the cursor to the first column in that row
 
-### MIME Type
+Lines **may not** end in a newline (CR, CRLF, or LF).
 
+### MIME Type
 When transferring PXL images on the internet, the appropriate MIME type is
 `image/pxl`.
 
-License
--------
-
-This repository is licensed under the AGPL0-v3.0 license.
+### License
+- This repository is licensed under the AGPL0-v3.0 license.
