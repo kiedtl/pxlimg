@@ -124,7 +124,7 @@ Compressed:
 ```
 %PXLCv1.0.0
 %CHAR▀
-(õéo|{ê8)(®Ýß|{êc)\n
+(õ…o|{ê8)(®Ýß|{êc)\n
 ```
 
 ### MIME Type
