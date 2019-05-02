@@ -22,33 +22,23 @@ sequences based images.
 
 ### Example
 
+See the `samples` directory of this repository, or view them in the terminal with cURL:
 ```
-# coming soon
+curl -sSL https://raw.githubusercontent.com/kiedtl/pxlspec/master/samples/scene.pxl
 ```
 
 ### Spec
 
 * PXL relies heavily on ASCII escape sequences.
 * Escape (`\e`) is the  ESC (`0x1B` / `U+001B`)
-* PXL newlines are an LF (`0x0A`).
 * Each pixel character is the Unicode upper-half block (`0x2580`)
-* ASCII escape code separator can be either `:` or `;` (or both).
+* The ASCII escape code separator can be either `:` or `;` (or both).
 
 ### Files
 
 - A PXL file can be either encoded as ASCII or UTF-8. However, UTF-8 
 is strongly preferred.
 - A PXL image file has the `.pxl` file extension.
-- A PXL image file *may* contain a marker at the beginning of the file, 
-  showing that it is a PXL file and what version it is:
-  ```
-  \eP\eX\eL\e[<version>
-  ```
-  E.g. if the image adheres to v1.2.3 of the PXL spec, the marker 
-  should look like this:
-  ```
-  \eP\eX\eL[1.2.3
-  ```
 
 ### Pixel
 
