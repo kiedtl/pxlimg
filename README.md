@@ -68,14 +68,14 @@ See [this page](https://docs.microsoft.com/en-us/windows/console/console-virtual
 Lines are comprised of multiple pixels joined without any 
 spaces/delimiter. Lines always end with the following sequence:
 ```
-\e[0m\e[B\e[0G
+\e[0m\e[B\e[0G\n
 ```
 This sequence is required. It does three things:
 - resets the color
 - moves the cursor down one row
 - moves the cursor to the first column in that row
 
-Lines **may not** end in a newline (CR, CRLF, or LF).
+Lines also end in a newline (LF).
 
 ### Viewing PXL images
 PXL images may be viewed either with:
