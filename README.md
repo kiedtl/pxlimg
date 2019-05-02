@@ -89,6 +89,7 @@ PXL images may be viewed either with:
 
 ### (WIP) PXL image compression
 - PXL compressed images MUST be encoded as UTF-8.
+- PXL compressed images have the `.pxlc` file extension.
 - Each pixel is separated by a semicolon. The BG SGR and the FB SGR
   is separated by a pipe (`|`).
 - Each value of the RGB value is replaced by the ASCII equivalent.
