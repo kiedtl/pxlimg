@@ -78,6 +78,16 @@ This sequence is required. It does three things:
 
 Lines **may not** end in a newline (CR, CRLF, or LF).
 
+### Viewing PXL images
+PXL images may be viewed either with:
+- the `cat` command (on Linux, macOS, BSD, MSYS2/Cygwin, PowerShell)
+- the `type` command (on PowerShell and Windows CMD)
+- with cURL, if the image is on the internet:
+  ```
+  curl -sSL https://blahblah.org/files/img/blah/blah24.pxl
+  ```
+- any other command-line program that reads a file and displays raw data
+
 ### MIME Type
 When transferring PXL images on the internet, the appropriate MIME type is
 `image/pxl`.
