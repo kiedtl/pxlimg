@@ -29,7 +29,7 @@ sequences based images.
 ### Spec
 
 * PXL relies heavily on ASCII escape sequences.
-* Escape (`E`) is the  ESC (`0x1B` / `U+001B`)
+* Escape (`\e`) is the  ESC (`0x1B` / `U+001B`)
 * PXL newlines are an LF (`0x0A`).
 * Each pixel character is the Unicode upper-half block (`0x2580`)
 * ASCII escape code separator can be either `:` or `;` (or both).
@@ -39,7 +39,16 @@ sequences based images.
 - A PXL file can be either encoded as ASCII or UTF-8. However, UTF-8 
 is strongly preferred.
 - A PXL image file has the `.pxl` file extension.
-
+- A PXL image file *may* contain a marker at the beginning of the file, 
+  showing that it is a PXL file and what version it is:
+  ```
+  \eP\eX\eL\e[<version>
+  ```
+  E.g. if the image adheres to v1.2.3 of the PXL spec, the marker 
+  should look like this:
+  ```
+  \eP\eX\eL[1.2.3
+  ```
 
 ### Pixel
 
@@ -47,20 +56,20 @@ A single 'pixel' is actually two pixels in PXL, using the old
 Unicode half-block trick.
 
 ```
-E[48;2;RRR;GGG;BBBmE[38;2;RRR;GGG;BBBm▀
+\e[48;2;RRR;GGG;BBBm\e[38;2;RRR;GGG;BBBm▀
 ```
 
 #### Pixel anatomy
 A single pixel is comprised of two SGR (Set Graphics Rendition) ASCII escape sequences.
 - The first sets **background** color of the pixel.
-  - This is comprised of a ESC char (`E`), `[48;2`, and then a semicolon/colon delimited RGB value ended by an `m`.
+  - This is comprised of a ESC char (`\e`), `[48;2`, and then a semicolon/colon delimited RGB value ended by an `m`.
     ```
-    E[48;2;RRR;GGG;BBBm
+    \e[48;2;RRR;GGG;BBBm
     ```
 - The second sets the **foreground** color of the pixel.
   - This is comprised of the ESC, `[38;2`, a semicolon/colon delimited RGB value ended by an `m`, and the pixel char.
     ```
-    E[38;2;RRR;GGG;BBBm▀
+    \e[38;2;RRR;GGG;BBBm▀
     ```
     
 See [this page](https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences#extended-colors) for more information regarding the SGR ASCII escape sequences.
@@ -69,7 +78,7 @@ See [this page](https://docs.microsoft.com/en-us/windows/console/console-virtual
 Lines are comprised of multiple pixels joined without any 
 spaces/delimiter. Lines always end with the following sequence:
 ```
-E[0mE[BE[0G
+\e[0m\e[B\e[0G
 ```
 This sequence is required. It does three things:
 - resets the color
