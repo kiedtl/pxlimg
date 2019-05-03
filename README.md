@@ -17,6 +17,8 @@ sequences based images.
 - [Files](#user-content-files)
 - [Pixel](#user-content-pixel)
 - [Lines](#user-content-lines)
+- [Viewing PXL Images](#user-content-viewing-pxl-images)
+- [PXL Image Compression](#user-content-pxl-images-compression)
 - [MIME Type](#user-content-mime-type)
 - [License](#user-content-license)
 
