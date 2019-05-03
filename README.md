@@ -87,15 +87,13 @@ PXL images may be viewed either with:
   ```
 - any other command-line program that reads a file and displays raw data
 
-### (WIP) PXL image compression
+### PXL image compression
 - PXL compressed images MUST be encoded as UTF-8.
 - PXL compressed images have the `.pxlc` file extension.
 - Each pixel is separated by a semicolon. The BG SGR and the FB SGR
   is separated by a pipe (`|`).
-- Each value of the RGB value is replaced by the ASCII equivalent.
-  - For example, the RGB value `255,234,167` would become `ÿê§`.
-    - IF the RGB value is lower than 31, the number 255 is added to 
-      that value. E.g. 12 would become 267.
+- Each value of the RGB value has the number 125 added to it; then the number
+  is replaced by the Unicode equivelent of that code.
 - The line is ended with an LF newline instead of the usual sequence.
 - Each compressed image file starts a marker indicating the version of the
   PXL spec that is adheres to. E.g. is the PXL version is v1.2.3, then
@@ -111,13 +109,17 @@ Uncompressed:
 ```
 Compressed:
 ```
-%PXLCv1.0.0
-õ…o|{ê8;®Ýß|{êc\n
+%PXLCv0.0.1
+ŲĂì|øŧµ;īŚŜ|øŧà;
 ```
+
+This compression can reduce the file size of a PXL image by up to 70%. However, the compressed image is not directly viewable by normal methods until it is decompressed.
 
 ### MIME Type
 When transferring PXL images on the internet, the appropriate MIME type is
 `image/pxl`.
+
+If the picture is compressed, the MIME type is `image/pxlc`.
 
 ### License
 - This repository is licensed under the AGPL0-v3.0 license.
